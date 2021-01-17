@@ -148,3 +148,14 @@ I used my linux academy account to create this cluster as shown below
 
 ### Setup illustration
 ![image](https://user-images.githubusercontent.com/17851915/104834630-66106580-58a9-11eb-8591-0c513cde3847.png)
+
+### Check if App is exposed through Nodeport service (port 30000)
+
+1- open postman and hit "/health" endpoint
+![image](https://user-images.githubusercontent.com/17851915/104852184-07c3a100-5902-11eb-837f-d4e3d25eb336.png)
+
+2- open postman and make post request to create resource (notepad)
+![image](https://user-images.githubusercontent.com/17851915/104852300-d5ff0a00-5902-11eb-97df-c1368418eae9.png)
+
+3- Open web browser and navigate to "http://karimothman2c.mylabserver.com:30000/" to get persistent notepad
+![image](https://user-images.githubusercontent.com/17851915/104852349-4574f980-5903-11eb-94a9-048ce031508e.png)
