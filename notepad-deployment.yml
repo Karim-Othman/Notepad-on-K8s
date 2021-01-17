@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notepad
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notepad
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: notepad
+    spec:
+      containers:
+      - name: notepad
+        image: karimothman/notepad:latest
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: test
+        - name: ENV_TEST_MYSQL_HOST
+          value: mysql
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+      imagePullSecrets:
+      - name: regcred
