@@ -60,8 +60,8 @@ I used my linux academy account to create this cluster as shown below
     $sudo docker push karimothman/notepad
     
 ### Create mysql setup
-1- define my-sql storage class yml file "mysql-sc.yml" and make sure to set "allowVolumeExpansion" with ture for future expansion if needed
-2- define persistence volume yml file "mysql-pv.yml" with persistentVolumeReclaimPolicy= retain in to keep data in it. Also, using host path isn't the best practise in multi nodes env --- accordingly, I'll restrict mysql deployment to one node with label mysql-persist-node
+1- define my-sql storage class yml file "mysql-sc.yml" and make sure to set "allowVolumeExpansion" with true for future expansion if needed
+2- define persistence volume yml file "mysql-pv.yml" with persistentVolumeReclaimPolicy= retain in to keep data in it. Also, using host path isn't the best practice in multi nodes env --- accordingly, I'll restrict mysql deployment to one node with label mysql-persist-node
 3- label worker2 "karimothman1c.mylabserver.com" node with mysql-persist-node
 
     $kubectl label nodes "karimothman1c.mylabserver.com"  mysql-persist-node=true
@@ -78,7 +78,7 @@ I used my linux academy account to create this cluster as shown below
 - this file should
     - deploy one replica of mysql:5.7 image
     - (as mentioned before) use nodeSelector and restrict the deployment to "mysql-persist-node" nodes
-    - refrence "MysqlPass" secret created before as MYSQL_ROOT_PASSWORD
+    - reference "MysqlPass" secret created before as MYSQL_ROOT_PASSWORD
 
 8- create the defined “mysql-deployment.yml” file
 
@@ -94,7 +94,7 @@ I used my linux academy account to create this cluster as shown below
     - use pre-created docker hub secret (imagePullSecrets --> regcred) to pull "karimothman/notepad:latest" image
     - run two replicas of it on any k8s node with no restriction as applied on mysql
     - have readinessProbe on path: /health
-    - refrence pre-created clusterIP service "mysql-service" on ENV_TEST_MYSQL_HOST environment variable
+    - reference pre-created clusterIP service "mysql-service" on ENV_TEST_MYSQL_HOST environment variable
     
 2- create the defined "notepad-deployment.yml" file
 
@@ -120,7 +120,7 @@ I used my linux academy account to create this cluster as shown below
     
     $kubectl exec notepad-78f544b4b5-8kbbt  -- ping mysql
 
-- make sure that you are defining "ENV_TEST_MYSQL_HOST" environemnt variable in a right way
+- make sure that you are defining "ENV_TEST_MYSQL_HOST" environment variable in a right way
 
 ### Setup illustration
 ![image](https://user-images.githubusercontent.com/17851915/104834630-66106580-58a9-11eb-8591-0c513cde3847.png)
